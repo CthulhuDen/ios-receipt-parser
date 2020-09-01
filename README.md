@@ -70,6 +70,6 @@ $receipt = $parser->parseUsingOnlyTrustedCerts(RECEIPT, CERT_OR_PATH_TO_CERT, OT
 var_dump($receipt->getBundleId());
 ```
 
-'parseUsingOnlyTrustedCerts' being used guarantees the signature in PKCS#7 has been validated against one of the
+`parseUsingOnlyTrustedCerts` being used guarantees the signature in PKCS#7 has been validated against one of the
 certificates you have provided. The certificates are considered trusted (their own signatures are not verified),
 so take care to only pass this function known-valid certificates.
