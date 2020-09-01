@@ -1,0 +1,23 @@
+{
+  "name": "cthulhu/ios-receipt-parser",
+  "description": "Utility to parse Apple-issued PKCS#7 container with receipts",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Denis Yuzhanin",
+      "email": "cthulhu.den@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Cthulhu\\IosReceiptParser\\": "src/"
+    }
+  },
+  "require": {
+    "phpseclib/phpseclib": "^2.0"
+  },
+  "suggest": {
+    "symfony/process": "To run OpenSSL in process to actually verify PKCS#7 container signatures"
+  }
+}
