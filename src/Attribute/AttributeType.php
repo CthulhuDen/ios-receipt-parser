@@ -8,28 +8,26 @@ namespace Cthulhu\IosReceiptParser\Attribute;
 final class AttributeType
 {
     // Receipt
-
-    const RECEIPT_BUNDLE_ID = 2;
-    const RECEIPT_APP_VERSION = 3;
-    const RECEIPT_OPAQUE = 4;
-    const RECEIPT_SHA1 = 5;
-    const RECEIPT_CREATION_DATE = 12;
-    const RECEIPT_IN_APP = 17;
-    const RECEIPT_ORIGINAL_APP_VERSION = 19;
-    const RECEIPT_EXPIRATION_DATE = 21;
+    public const RECEIPT_BUNDLE_ID = 2;
+    public const RECEIPT_APP_VERSION = 3;
+    public const RECEIPT_OPAQUE = 4;
+    public const RECEIPT_SHA1 = 5;
+    public const RECEIPT_CREATION_DATE = 12;
+    public const RECEIPT_IN_APP = 17;
+    public const RECEIPT_ORIGINAL_APP_VERSION = 19;
+    public const RECEIPT_EXPIRATION_DATE = 21;
 
     // InApp
-
-    const IN_APP_QUANTITY = 1701;
-    const IN_APP_PRODUCT_IDENTIFIER = 1702;
-    const IN_APP_TRANSACTION_IDENTIFIER = 1703;
-    const IN_APP_PURCHASE_DATE = 1704;
-    const IN_APP_ORIGINAL_TRANSACTION_IDENTIFIER = 1705;
-    const IN_APP_ORIGINAL_PURCHASE_DATE = 1706;
-    const IN_APP_SUBSCRIPTION_EXPIRATION_DATE = 1708;
-    const IN_APP_WEB_ORDER_LINE_ITEM_ID = 1711;
-    const IN_APP_CANCELLATION_DATE = 1712;
-    const IN_APP_SUBSCRIPTION_INTRODUCTORY_PRICE_PERIOD = 1719;
+    public const IN_APP_QUANTITY = 1701;
+    public const IN_APP_PRODUCT_IDENTIFIER = 1702;
+    public const IN_APP_TRANSACTION_IDENTIFIER = 1703;
+    public const IN_APP_PURCHASE_DATE = 1704;
+    public const IN_APP_ORIGINAL_TRANSACTION_IDENTIFIER = 1705;
+    public const IN_APP_ORIGINAL_PURCHASE_DATE = 1706;
+    public const IN_APP_SUBSCRIPTION_EXPIRATION_DATE = 1708;
+    public const IN_APP_WEB_ORDER_LINE_ITEM_ID = 1711;
+    public const IN_APP_CANCELLATION_DATE = 1712;
+    public const IN_APP_SUBSCRIPTION_INTRODUCTORY_PRICE_PERIOD = 1719;
 
     private const JSON_FIELD_NAMES = [
         self::RECEIPT_BUNDLE_ID => 'bundle_id',
