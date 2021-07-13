@@ -2,6 +2,8 @@
 
 namespace Cthulhu\IosReceiptParser;
 
+use DateTime;
+
 use Cthulhu\IosReceiptParser\ASN1\Pkcs7Reader;
 use Cthulhu\IosReceiptParser\ASN1\Pkcs7UnverifiedParser;
 use Cthulhu\IosReceiptParser\ASN1\SimpleDecoder;
@@ -40,5 +42,14 @@ final class Parser
     private function parsePayload(string $payload): Receipt
     {
         return new Receipt($this->decoder->decodeAttributesSet($payload), $this->decoder);
+    }
+
+    public static function convertTimestampMs(?string $time): ?string
+    {
+        if ($time === null) {
+            return null;
+        }
+        $datetime = DateTime::createFromFormat(DateTime::ATOM, $time);
+        return (string) $datetime->getTimestamp() . $datetime->format('v');
     }
 }

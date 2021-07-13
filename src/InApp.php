@@ -74,6 +74,14 @@ final class InApp implements \JsonSerializable
     /**
      * @throws Exception\AttributeMissingException
      */
+    public function getPurchaseDateTimestamp(): string
+    {
+        return Parser::convertTimestampMs($this->getPurchaseDate());
+    }
+
+    /**
+     * @throws Exception\AttributeMissingException
+     */
     public function getOriginalTransactionIdentifier(): string
     {
         $raw = $this->attributes->get(AttributeType::IN_APP_ORIGINAL_TRANSACTION_IDENTIFIER);
@@ -95,11 +103,24 @@ final class InApp implements \JsonSerializable
             : $this->decoder->decode($raw, ASN1::TYPE_IA5_STRING);
     }
 
+    /**
+     * @throws Exception\AttributeMissingException
+     */
+    public function getOriginalPurchaseDateTimestamp(): string
+    {
+        return Parser::convertTimestampMs($this->getOriginalPurchaseDate());
+    }
+
     public function getSubscriptionExpirationDate(): ?string
     {
         $raw = $this->attributes->get(AttributeType::IN_APP_SUBSCRIPTION_EXPIRATION_DATE);
 
         return $raw === null ? null : $this->decoder->decode($raw, ASN1::TYPE_IA5_STRING);
+    }
+
+    public function getSubscriptionExpirationDateTimestamp(): ?string
+    {
+        return Parser::convertTimestampMs($this->getSubscriptionExpirationDate());
     }
 
     public function getWebOrderLineItemID(): ?string
@@ -114,6 +135,11 @@ final class InApp implements \JsonSerializable
         $raw = $this->attributes->get(AttributeType::IN_APP_CANCELLATION_DATE);
 
         return $raw === null ? null : $this->decoder->decode($raw, ASN1::TYPE_IA5_STRING);
+    }
+
+    public function getCancellationDateTimestamp(): ?string
+    {
+        return Parser::convertTimestampMs($this->getCancellationDate());
     }
 
     public function getSubscriptionIntroductoryPricePeriod(): ?string
@@ -135,11 +161,15 @@ final class InApp implements \JsonSerializable
             AttributeType::IN_APP_PRODUCT_IDENTIFIER => $this->getProductIdentifier(),
             AttributeType::IN_APP_TRANSACTION_IDENTIFIER => $this->getTransactionIdentifier(),
             AttributeType::IN_APP_PURCHASE_DATE => $this->getPurchaseDate(),
+            AttributeType::IN_APP_PURCHASE_DATE_MS => $this->getPurchaseDateTimestamp(),
             AttributeType::IN_APP_ORIGINAL_TRANSACTION_IDENTIFIER => $this->getOriginalTransactionIdentifier(),
             AttributeType::IN_APP_ORIGINAL_PURCHASE_DATE => $this->getOriginalPurchaseDate(),
+            AttributeType::IN_APP_ORIGINAL_PURCHASE_DATE_MS => $this->getOriginalPurchaseDateTimestamp(),
             AttributeType::IN_APP_SUBSCRIPTION_EXPIRATION_DATE => $this->getSubscriptionExpirationDate(),
+            AttributeType::IN_APP_SUBSCRIPTION_EXPIRATION_DATE_MS => $this->getSubscriptionExpirationDateTimestamp(),
             AttributeType::IN_APP_WEB_ORDER_LINE_ITEM_ID => $this->getWebOrderLineItemID(),
             AttributeType::IN_APP_CANCELLATION_DATE => $this->getCancellationDate(),
+            AttributeType::IN_APP_CANCELLATION_DATE_MS => $this->getCancellationDateTimestamp(),
             AttributeType::IN_APP_SUBSCRIPTION_INTRODUCTORY_PRICE_PERIOD => $this
                 ->getSubscriptionIntroductoryPricePeriod(),
         ] as $type => $value) {

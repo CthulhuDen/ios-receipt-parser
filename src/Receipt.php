@@ -82,6 +82,14 @@ final class Receipt implements \JsonSerializable
         );
     }
 
+    /**
+     * @throws Exception\AttributeMissingException
+     */
+    public function getCreationDateTimestamp(): string
+    {
+        return Parser::convertTimestampMs($this->getCreationDate());
+    }
+
     public function getInApp(): array
     {
         return array_map(function (string $inApp): InApp {
@@ -116,19 +124,30 @@ final class Receipt implements \JsonSerializable
     /**
      * @throws Exception\AttributeMissingException
      */
+    public function getExpirationDateTimestamp(): string
+    {
+        return Parser::convertTimestampMs($this->getExpirationDate());
+    }
+
+    /**
+     * @throws Exception\AttributeMissingException
+     */
     public function jsonSerialize(): array
     {
         $return = [];
 
         foreach ([
+            AttributeType::RECEIPT_APP_ITEM_ID => 0,
             AttributeType::RECEIPT_BUNDLE_ID => $this->getBundleId(),
             AttributeType::RECEIPT_APP_VERSION => $this->getAppVersion(),
             AttributeType::RECEIPT_CREATION_DATE => $this->getCreationDate(),
+            AttributeType::RECEIPT_CREATION_DATE_MS => $this->getCreationDateTimestamp(),
             AttributeType::RECEIPT_IN_APP => array_map(function (InApp $inApp): array {
                 return $inApp->jsonSerialize();
             }, $this->getInApp()),
             AttributeType::RECEIPT_ORIGINAL_APP_VERSION => $this->getOriginalAppVersion(),
             AttributeType::RECEIPT_EXPIRATION_DATE => $this->getExpirationDate(),
+            AttributeType::RECEIPT_EXPIRATION_DATE_MS => $this->getExpirationDateTimestamp(),
         ] as $type => $value) {
             $return[AttributeType::getJsonFieldName($type)] = $value;
         }
